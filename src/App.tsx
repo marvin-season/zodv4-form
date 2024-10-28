@@ -1,5 +1,9 @@
+import { Index } from "@/components/index";
+
 function App() {
-  return <>APP</>;
+  return <>
+    <Index />
+  </>;
 }
 
 export default App;
