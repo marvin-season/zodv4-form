@@ -11,6 +11,9 @@ export default defineConfig({
     react(),
     dts({ include: ["lib"], exclude: ["src"] }) as any,
   ],
+  css: {
+    postcss: './postcss.config.js',
+  },
   server: {
     port: 10006,
     host: true,
