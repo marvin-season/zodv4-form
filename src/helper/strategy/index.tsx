@@ -2,6 +2,7 @@ import NotificationStrategy from "./notification";
 import ModalStrategy from "./modal";
 import ConfirmStrategy from "./confirm";
 import { Dispatch, ReactNode, SetStateAction, useEffect } from "react";
+import { ContextProps } from "@/helper/context.tsx";
 
 export interface IStrategy<
     S extends Record<string, any>,
@@ -16,7 +17,7 @@ export interface IStrategy<
 
 export function Strategy(
     item: IStrategy<any, any> & {
-        setActionContext: Dispatch<SetStateAction<Record<string, any>>>;
+        setActionContext: Dispatch<SetStateAction<ContextProps>>
     },
 ) {
     const state = item.useInitState();
