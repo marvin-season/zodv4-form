@@ -1,15 +1,29 @@
 {
-  "name": "lucky-day",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@aio/modal",
+  "private": false,
+  "version": "0.0.1",
   "type": "module",
+  "types": "./dist/main.d.ts",
+  "module": "./dist/main.js",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "pretty:check": "npx prettier ./src --check",
-    "pretty:write": "npx prettier ./src --write"
+    "pretty:check": "npx prettier lib --check",
+    "pretty:write": "npx prettier lib --write"
+  },
+  "peerDependencies": {
+    "@tippyjs/react": "^4.2.6",
+    "tippy.js": "^6.3.7",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.7"
   },
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
@@ -21,6 +35,8 @@
     "tailwindcss": "^3.4.7"
   },
   "devDependencies": {
+    "glob": "^10.3.15",
+    "vite-plugin-dts": "^2.2.0",
     "@types/node": "^22.8.1",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
