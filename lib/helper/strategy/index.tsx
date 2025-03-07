@@ -33,7 +33,7 @@ export function Strategy(
         });
     }, []);
 
-    return item.useUI(state, action);
+    return <>{item.useUI(state, action)}</>;
 }
 
 export const useStrategies = () => {

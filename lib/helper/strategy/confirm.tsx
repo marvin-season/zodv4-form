@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from "react";
+import React, { JSX, ReactNode, useRef, useState } from "react";
 import { IStrategy } from "./index";
 import Tippy from "@tippyjs/react";
 import "tippy.js/animations/shift-away.css"; // 过渡动画
@@ -47,7 +47,7 @@ function useAction(state: StateType) {
     };
 }
 
-function ConfirmUI(props: StateType & ActionType): ReactNode {
+function ConfirmUI(props: StateType & ActionType) {
     // only one
     const [loading, setLoading] = useState(false);
     if (!props.confirm) {
@@ -64,9 +64,9 @@ function ConfirmUI(props: StateType & ActionType): ReactNode {
                         onClick={async () => {
                             setLoading(true);
                             try {
-                                await props.confirm.onBeforeConfirm?.();
+                                await props.confirm!.onBeforeConfirm?.();
                                 props.close();
-                                props.confirm.onConfirm?.();
+                                props.confirm!.onConfirm?.();
                             } catch (e) {
                             } finally {
                                 setLoading(false);

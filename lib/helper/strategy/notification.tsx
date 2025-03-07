@@ -46,7 +46,7 @@ function useInitState() {
     };
 }
 
-function NotificationUI(props: StateType & ActionType): ReactNode {
+function NotificationUI(props: StateType & ActionType) {
     return props?.notifications.map((notification, index) => {
         return (
             <div
@@ -82,7 +82,7 @@ const NotificationStrategy: IStrategy<StateType, ActionType> = {
     useAction,
     useInitState,
     useUI(state: StateType, action: ActionType) {
-        return <NotificationUI {...state} {...action} />;
+        return  <NotificationUI {...state} {...action} />
     },
 };
 

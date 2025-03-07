@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from "react";
+import { JSX, ReactNode, useRef, useState } from "react";
 import { IStrategy } from "./index";
 
 type Modal = {
@@ -48,7 +48,7 @@ function useAction(state: StateType) {
     };
 }
 
-function ModalUI(props: StateType & ActionType): ReactNode {
+function ModalUI(props: StateType & ActionType) {
     // only one
     const [loading, setLoading] = useState(false);
 
@@ -62,7 +62,7 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                     "fixed inset-0 z-999 backdrop-blur flex items-center justify-center"
                 }
                 onClick={() => {
-                    props.close(modal.id);
+                    props.close(modal.id!);
                 }}
             >
                 <div
@@ -86,7 +86,7 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                                 "cursor-pointer rounded border px-2.5 py-1.5 text-[#222] leading-4 text-sm"
                             }
                             onClick={() => {
-                                props.close(modal.id);
+                                props.close(modal.id!);
                             }}
                         >
                             取消
@@ -99,7 +99,7 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                                 setLoading(true);
                                 try {
                                     await modal.onBeforeConfirm?.();
-                                    props.close(modal.id);
+                                    props.close(modal.id!);
                                     await modal.onConfirm?.();
                                 } catch (e) {
                                     console.error(e);
