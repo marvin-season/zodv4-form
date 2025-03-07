@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
+    "tippy.js": "^6.3.7",
     "autoprefixer": "^10.4.20",
     "postcss": "^8",
     "react": "^18.3.1",

@@ -26,6 +26,9 @@ importers:
       tailwindcss:
         specifier: ^3.4.7
         version: 3.4.14
+      tippy.js:
+        specifier: ^6.3.7
+        version: 6.3.7
     devDependencies:
       '@eslint/js':
         specifier: ^9.13.0
