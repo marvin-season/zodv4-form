@@ -6,6 +6,8 @@ type Modal = {
     title?: string;
     type?: "primary";
     render: () => ReactNode;
+    // all the action for current modal
+    headerRender?: (actions: { closeModal?: () => void; }) => ReactNode;
     footerRender?: (actions: {
         closeModal?: () => void;
         confirmModal: () => void;
@@ -35,6 +37,7 @@ function useInitState() {
 
 // 提取 useInitState 方法的类型
 export type StateType = ReturnType<typeof useInitState>;
+// all the action for modals
 export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
@@ -93,7 +96,11 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
                     e.stopPropagation();
                 }}
             >
-                <div className={"text-lg font-bold"}>{modal.title}</div>
+                {
+                    modal.headerRender ? modal.headerRender({ closeModal }) :
+                        <div className={"text-lg font-bold"}>{modal.title}</div>
+                }
+
                 <div className={"flex-1"}>{modal.render()}</div>
                 {/*footer*/}
                 {modal.footerRender ? (
