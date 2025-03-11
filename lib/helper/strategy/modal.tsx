@@ -3,6 +3,7 @@ import { IStrategy } from "./index";
 
 type Modal = {
   id?: number;
+  title?: string;
   type?: "primary";
   render: () => ReactNode;
   footerRender?: (actions: { closeModal?: () => void; confirmModal: () => void; loading: boolean }) => ReactNode;
@@ -89,7 +90,7 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
         }}
       >
         <div className={"text-lg font-bold"}>
-          这是标题 {modal.id}
+          {modal.title}
         </div>
         <div className={"flex-1"}>
           {modal.render()}
