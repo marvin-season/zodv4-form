@@ -17,7 +17,7 @@ export interface IStrategy<
 
 export function Strategy(
     item: IStrategy<any, any> & {
-        setActionContext: Dispatch<SetStateAction<ContextProps>>
+        setActionContext: Dispatch<SetStateAction<ContextProps>>;
     },
 ) {
     const state = item.useInitState();

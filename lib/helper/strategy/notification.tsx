@@ -83,7 +83,7 @@ const NotificationStrategy: IStrategy<StateType, ActionType> = {
     useAction,
     useInitState,
     useUI(state: StateType, action: ActionType) {
-        return  <NotificationUI {...state} {...action} />
+        return <NotificationUI {...state} {...action} />;
     },
 };
 
