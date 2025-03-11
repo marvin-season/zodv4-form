@@ -9,6 +9,12 @@ const InfiniteModal = () => {
         onClick={async (e) => {
             const result = await helper.modal.open({
                 render: InfiniteModal,
+                footerRender: ({closeModal,}) => {
+                    return <div className={'flex gap-2'}>
+                        <button onClick={closeModal}>cancel</button>
+                        <button onClick={closeModal}>confirm</button>
+                    </div>
+                },
                 onBeforeConfirm: () => {
                     console.log("onBeforeConfirm");
                     return new Promise((resolve) =>
