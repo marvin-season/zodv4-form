@@ -5,7 +5,7 @@ type Modal = {
   id?: number;
   type?: "primary";
   render: () => ReactNode;
-  footerRender?: (actions: { closeModal?: () => void }) => ReactNode;
+  footerRender?: (actions: { closeModal?: () => void; confirmModal: () => void; loading: boolean }) => ReactNode;
   onBeforeConfirm?: () => Promise<void> | void;
   onConfirm?: () => Promise<void> | void;
   className?: string;
@@ -50,15 +50,23 @@ function useAction(state: StateType) {
   };
 }
 
-function Modal({ modal, close, loading, setLoading }: {
-  modal: Modal,
-  loading: boolean;
-  setLoading: (loading: boolean) => void;
-} & Pick<ActionType, "close">) {
+function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
   const [i1, i2] = transferToDirection(modal.id || 0);
-
+  const [loading, setLoading] = useState(false);
   const closeModal = () => {
     close(modal.id!);
+  };
+  const confirmModal = async () => {
+    setLoading(true);
+    try {
+      await modal.onBeforeConfirm?.();
+      close(modal.id!);
+      await modal.onConfirm?.();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -88,37 +96,27 @@ function Modal({ modal, close, loading, setLoading }: {
         </div>
         {/*footer*/}
         {
-          modal.footerRender ? modal.footerRender({ closeModal }) : <div className={"flex justify-end gap-2"}>
-            <button
-              className={
-                "cursor-pointer rounded border px-2.5 py-1.5 text-[#222] leading-4 text-sm"
-              }
-              onClick={() => {
-                close(modal.id!);
-              }}
-            >
-              取消
-            </button>
-            <button
-              className={
-                "cursor-pointer rounded bg-blue-500 hover:bg-blue-600 px-2.5 py-1.5 text-white leading-4 text-sm"
-              }
-              onClick={async () => {
-                setLoading(true);
-                try {
-                  await modal.onBeforeConfirm?.();
-                  close(modal.id!);
-                  await modal.onConfirm?.();
-                } catch (e) {
-                  console.error(e);
-                } finally {
-                  setLoading(false);
+          modal.footerRender ? modal.footerRender({ closeModal, confirmModal, loading }) :
+            <div className={"flex justify-end gap-2"}>
+              <button
+                className={
+                  "cursor-pointer rounded border px-2.5 py-1.5 text-[#222] leading-4 text-sm"
                 }
-              }}
-            >
-              {loading ? "loading" : "确认"}
-            </button>
-          </div>
+                onClick={() => {
+                  close(modal.id!);
+                }}
+              >
+                取消
+              </button>
+              <button
+                className={
+                  "cursor-pointer rounded bg-blue-500 hover:bg-blue-600 px-2.5 py-1.5 text-white leading-4 text-sm"
+                }
+                onClick={confirmModal}
+              >
+                {loading ? "loading" : "确认"}
+              </button>
+            </div>
         }
 
       </div>
@@ -126,24 +124,12 @@ function Modal({ modal, close, loading, setLoading }: {
   );
 }
 
-function ModalContent({ render }: {
-  render: () => ReactNode;
-}) {
-  return render();
-}
-
-
 function ModalUI({ modals, close, open }: StateType & ActionType) {
-  // only one
-  const [loading, setLoading] = useState(false);
-
   return modals.map((modal, index) => {
     return <Modal
       key={modal.id}
       modal={modal}
       close={close}
-      loading={loading}
-      setLoading={setLoading}
     />;
   });
 }
