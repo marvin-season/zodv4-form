@@ -1,7 +1,7 @@
 {
   "name": "aio-modal",
   "private": false,
-  "version": "0.0.2004-testing",
+  "version": "0.0.2005-testing",
   "type": "module",
   "types": "./dist/main.d.ts",
   "module": "./dist/main.js",
