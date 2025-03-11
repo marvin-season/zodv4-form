@@ -1,8 +1,9 @@
 # AIO-Modal
-
+## Preview
+https://marvin-season.github.io/danny-website/docs/react/advanced/use-helper
 ## install
 ```shell
-pnpm add ai-modal
+pnpm add aio-modal
 ```
 ## config
 **`node_modules/aio-modal/**/*`** in your tailwind config
