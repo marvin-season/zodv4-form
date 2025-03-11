@@ -9,7 +9,7 @@ type Modal = {
     onConfirm?: () => Promise<void> | void;
     className?: string;
 };
-const Direction = [1, -1, 1, -1]
+const Direction = [0, 1, -1]
 function transferToDirection(i: number) {
     const index = i % Direction.length;
     return [Direction[index], Direction[(index + 1) % Direction.length]];
@@ -76,7 +76,7 @@ function ModalUI(props: StateType & ActionType) {
                     style={{
                         transform: `translate(${20 * i1}px, ${20 * i2}px)`,
                     }}
-                    className={`w-[500px] min-h-[200px] z-999
+                    className={`w-[800px] max-md:w-[500px] max-sm:w-4/5 min-h-[200px] z-999
                     bg-[#fefefe] border border-gray-200 rounded-2xl shadow-2xl p-4 flex flex-col justify-between ${modal.className}`}
                     onClick={(e) => {
                         e.stopPropagation();
