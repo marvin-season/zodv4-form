@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { IStrategy } from "./index";
 
 type Notification = {
@@ -17,20 +17,19 @@ function useAction(state: StateType) {
         state.setNotifications((prev) => prev.filter((item) => item.id !== id));
     };
     const warning = (message: string) => {
-        let id = (state.notifications.at(-1)?.id || 0) + 1;
+        state.idRef.current++;
         state.setNotifications((prev) => {
-            id = (prev.at(-1)?.id || 0) + 1;
             return prev.concat({
                 message,
-                id,
+                id: state.idRef.current,
                 type: "warning",
                 className: "bg-white",
             });
         });
 
         setTimeout(() => {
-            remove(id);
-        }, 6000);
+            remove(state.idRef.current);
+        }, 3000);
     };
     return {
         remove,
@@ -39,8 +38,10 @@ function useAction(state: StateType) {
 }
 
 function useInitState() {
+    const idRef = useRef(0);
     const [notifications, setNotifications] = useState<Notification[]>([]);
     return {
+        idRef,
         setNotifications,
         notifications,
     };
