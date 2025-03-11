@@ -48,6 +48,12 @@ function useAction(state: StateType) {
     };
 }
 
+function ModalContent({ render }: {
+    render: () => ReactNode;
+}) {
+    return render()
+}
+
 function ModalUI(props: StateType & ActionType) {
     // only one
     const [loading, setLoading] = useState(false);
@@ -79,7 +85,10 @@ function ModalUI(props: StateType & ActionType) {
                     <div className={"text-lg font-bold"}>
                         这是标题 {modal.id}
                     </div>
-                    <div className={"flex-1"}>{modal.render()}</div>
+                    <div className={"flex-1"}>
+                        {/* the order of Hooks is not changed */}
+                        <ModalContent render={modal.render}/>
+                    </div>
                     <div className={"flex justify-end gap-2"}>
                         <button
                             className={
