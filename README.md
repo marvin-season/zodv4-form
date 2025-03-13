@@ -93,7 +93,7 @@ const openYourModal = async () =>  await helper.modal.open({
 });
 ```
 
-## Notification
+## Confirm
 ```tsx
 const openYourNotification = async () => await helper.confirm.warning({
     render: () => {
