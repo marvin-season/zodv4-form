@@ -3,7 +3,13 @@ import { ModalHelperProvider, UseCase, useModalHelper } from "./main.ts";
 import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <ModalHelperProvider>
+    <ModalHelperProvider
+        customize={{
+            modal: {
+                headerRender: () => div,
+            },
+        }}
+    >
         <UseCase />
     </ModalHelperProvider>,
 );

@@ -11,10 +11,19 @@ const InfiniteModal = () => {
                 const result = await helper.modal.open({
                     title: "The InfiniteModal",
                     render: InfiniteModal,
-                    headerRender: ({closeModal}) =>  <div className={"text-lg font-bold flex justify-between"}>
-                        <span>Custom Title</span>
-                        <span className={"cursor-pointer"} onClick={closeModal}>X</span>
-                    </div>,
+                    headerRender: ({ closeModal }) => (
+                        <div
+                            className={"text-lg font-bold flex justify-between"}
+                        >
+                            <span>Custom Title</span>
+                            <span
+                                className={"cursor-pointer"}
+                                onClick={closeModal}
+                            >
+                                X
+                            </span>
+                        </div>
+                    ),
                     footerRender: ({ closeModal, confirmModal, loading }) => {
                         return (
                             <div className={"flex gap-2"}>

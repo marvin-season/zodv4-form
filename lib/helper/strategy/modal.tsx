@@ -1,18 +1,24 @@
 import { ReactNode, useRef, useState } from "react";
 import { IStrategy } from "./index";
 
+export type ModalHeaderRender = (actions: {
+    closeModal?: () => void;
+}) => ReactNode;
+export type ModalFooterRender = (actions: {
+    closeModal?: () => void;
+    confirmModal: () => void;
+    loading: boolean;
+}) => ReactNode;
+export type ModalContentRender = () => ReactNode;
+
 type Modal = {
     id?: number;
     title?: string;
     type?: "primary";
-    render: () => ReactNode;
+    render: ModalContentRender;
     // all the action for current modal
-    headerRender?: (actions: { closeModal?: () => void; }) => ReactNode;
-    footerRender?: (actions: {
-        closeModal?: () => void;
-        confirmModal: () => void;
-        loading: boolean;
-    }) => ReactNode;
+    headerRender?: ModalHeaderRender;
+    footerRender?: ModalFooterRender;
     onBeforeConfirm?: () => Promise<void> | void;
     onConfirm?: () => Promise<void> | void;
     className?: string;
@@ -80,9 +86,7 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
     return (
         <div
             key={modal.id}
-            className={
-                `fixed inset-0 z-999 backdrop-blur backdrop-opacity-25 flex items-center justify-center modal-container-backdrop`
-            }
+            className={`fixed inset-0 z-999 backdrop-blur backdrop-opacity-25 flex items-center justify-center modal-container-backdrop`}
             onClick={closeModal}
         >
             <div
@@ -98,10 +102,13 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
                     e.stopPropagation();
                 }}
             >
-                {
-                    modal.headerRender ? modal.headerRender({ closeModal }) :
-                        <div className={"text-lg font-bold modal-header"}>{modal.title}</div>
-                }
+                {modal.headerRender ? (
+                    modal.headerRender({ closeModal })
+                ) : (
+                    <div className={"text-lg font-bold modal-header"}>
+                        {modal.title}
+                    </div>
+                )}
 
                 <div className={"flex-1 modal-content"}>{modal.render()}</div>
                 {/*footer*/}
