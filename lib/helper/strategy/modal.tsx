@@ -81,7 +81,7 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
         <div
             key={modal.id}
             className={
-                "fixed inset-0 z-999 backdrop-blur flex items-center justify-center"
+                `fixed inset-0 z-999 backdrop-blur flex items-center justify-center modal-container-backdrop`
             }
             onClick={closeModal}
         >
@@ -91,22 +91,24 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
                     transform: `translate(${20 * i1}px, ${20 * i2}px)`,
                 }}
                 className={`w-[800px] max-md:w-[500px] max-sm:w-4/5 min-h-[200px] z-999
-                    bg-[#fefefe] border border-gray-200 rounded-2xl shadow-2xl p-4 flex flex-col justify-between ${modal.className}`}
+                    bg-[#fefefe] border border-gray-200 rounded-2xl shadow-2xl p-4 
+                    flex flex-col justify-between modal-container ${modal.className}
+                `}
                 onClick={(e) => {
                     e.stopPropagation();
                 }}
             >
                 {
                     modal.headerRender ? modal.headerRender({ closeModal }) :
-                        <div className={"text-lg font-bold"}>{modal.title}</div>
+                        <div className={"text-lg font-bold modal-header"}>{modal.title}</div>
                 }
 
-                <div className={"flex-1"}>{modal.render()}</div>
+                <div className={"flex-1 modal-content"}>{modal.render()}</div>
                 {/*footer*/}
                 {modal.footerRender ? (
                     modal.footerRender({ closeModal, confirmModal, loading })
                 ) : (
-                    <div className={"flex justify-end gap-2"}>
+                    <div className={"flex justify-end gap-2 modal-footer"}>
                         <button
                             className={
                                 "cursor-pointer rounded border px-2.5 py-1.5 text-[#222] leading-4 text-sm"
