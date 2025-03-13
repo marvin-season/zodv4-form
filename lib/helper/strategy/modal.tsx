@@ -4,6 +4,7 @@ import { useModalHelper } from "@/helper";
 
 export type ModalHeaderRender = (actions: {
     closeModal?: () => void;
+    title: Modal["title"];
 }) => ReactNode;
 export type ModalFooterRender = (actions: {
     closeModal?: () => void;
@@ -105,7 +106,12 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
                 }}
             >
                 {modal.headerRender ? (
-                    modal.headerRender({ closeModal })
+                    modal.headerRender({ closeModal, title: modal.title })
+                ) : modalCustomize.headerRender ? (
+                    modalCustomize.headerRender({
+                        closeModal,
+                        title: modal.title,
+                    })
                 ) : (
                     <div className={"text-lg font-bold modal-header"}>
                         {modal.title}
@@ -116,9 +122,7 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
                 {/*footer*/}
                 {modal.footerRender
                     ? modal.footerRender({ closeModal, confirmModal, loading })
-
                     : modalCustomize.footerRender
-
                       ? modalCustomize.footerRender({
                             closeModal,
                             confirmModal,

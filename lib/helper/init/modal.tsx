@@ -1,10 +1,10 @@
-import { ModalFooterRender } from "@/helper/strategy/modal.tsx";
+import { ModalFooterRender, ModalHeaderRender } from "@/helper/strategy/modal.tsx";
 
 export const InitModalFooterRender: ModalFooterRender = ({
-    closeModal,
-    confirmModal,
-    loading,
-}) => (
+                                                             closeModal,
+                                                             confirmModal,
+                                                             loading,
+                                                         }) => (
     <div className={"flex justify-end gap-2 modal-footer"}>
         <button
             className={
@@ -24,3 +24,15 @@ export const InitModalFooterRender: ModalFooterRender = ({
         </button>
     </div>
 );
+
+export const InitModalHeaderRender: ModalHeaderRender = ({
+                                                             title,
+                                                             closeModal,
+                                                         }) => <div
+    className={"text-lg font-bold modal-header"}>{title}</div>;
+
+
+export default {
+    footerRender: InitModalFooterRender,
+    headerRender: InitModalHeaderRender,
+}

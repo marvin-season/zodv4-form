@@ -8,7 +8,7 @@ import {
 } from "./strategy/modal";
 import { ActionType as NotificationActionType } from "./strategy/notification";
 import { ActionType as ConfirmActionType } from "./strategy/confirm";
-import { InitModalFooterRender } from "@/helper/init/modal.tsx";
+import initModalCustomize from "@/helper/init/modal.tsx";
 
 export interface ModalHelperConfig {}
 export interface ModalCustomize {
@@ -27,16 +27,14 @@ export interface ContextProps {
 
 export default function ModalHelperProvider({
     children,
-    modalCustomize = {
-        footerRender: InitModalFooterRender,
-    },
+    modalCustomize,
 }: {
     children: ReactNode;
     modalCustomize?: ModalCustomize;
 }) {
     const strategies = useStrategies();
     const [actionContext, setActionContext] = useState<ContextProps>({
-        modalCustomize,
+        modalCustomize: { ...initModalCustomize, ...modalCustomize}
     } as ContextProps);
 
     return (
