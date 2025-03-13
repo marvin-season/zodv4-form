@@ -25,17 +25,19 @@ export default {
 
 ```
 ## Context
+
 ```tsx
-import { HelperProvider } from "aio-modal";
+import { ModalHelperProvider, useModalHelper } from "aio-modal";
 
 function App() {
-  return (
-    <>
-      <HelperProvider>
-          {'your comp'}
-      </HelperProvider>
-    </>
-  );
+    const modalHelper = useModalHelper();
+    return (
+        <>
+            <ModalHelperProvider>
+                {'your comp'}
+            </ModalHelperProvider>
+        </>
+    );
 }
 ```
 
@@ -43,28 +45,12 @@ function App() {
 ## Warning
 
 ```tsx
-function UseCase() {
-    const helper = useHelper();
-    return (
-        <>
-            <button
-                className={
-                    "cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-white border-2 rounded-lg px-2 py-0.5"
-                }
-                onClick={(e) => {
-                    helper.notification.warning("网络异常");
-                }}
-            >
-                警告
-            </button>
-        </>
-    );
-}
+const openYourNotification = () => modalHelper.notification.warning("网络异常");
 ```
 
 ## Modal
 ```tsx
-const openYourModal = async () =>  await helper.modal.open({
+const openYourModal = async () =>  await modalHelper.modal.open({
     title: "The InfiniteModal",
     render: InfiniteModal,
     headerRender: ({closeModal}) =>  <div className={"text-lg font-bold flex justify-between"}>
@@ -95,7 +81,7 @@ const openYourModal = async () =>  await helper.modal.open({
 
 ## Confirm
 ```tsx
-const openYourNotification = async () => await helper.confirm.warning({
+const openYourNotification = async () => await modalHelper.confirm.warning({
     render: () => {
         return <>hi</>;
     },

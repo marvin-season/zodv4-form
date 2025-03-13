@@ -1,9 +1,9 @@
 import ReactDOM from "react-dom/client";
-import { HelperProvider, UseCase } from "./main.ts";
+import { ModalHelperProvider, UseCase, useModalHelper } from "./main.ts";
 import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <HelperProvider>
+    <ModalHelperProvider>
         <UseCase />
-    </HelperProvider>,
+    </ModalHelperProvider>,
 );

@@ -1,7 +1,7 @@
-import { useHelper } from "./index";
+import { useModalHelper } from "./index";
 
 const InfiniteModal = () => {
-    const helper = useHelper();
+    const helper = useModalHelper();
     return (
         <button
             className={
@@ -43,7 +43,7 @@ const InfiniteModal = () => {
 };
 
 export default function UseCase() {
-    const helper = useHelper();
+    const helper = useModalHelper();
     return (
         <>
             <button

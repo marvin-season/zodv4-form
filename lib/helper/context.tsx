@@ -10,14 +10,14 @@ export interface ContextProps {
     confirm: ConfirmActionType;
 }
 
-export default function HelperProvider({ children }: { children: ReactNode }) {
+export default function ModalHelperProvider({ children }: { children: ReactNode }) {
     const strategies = useStrategies();
     const [actionContext, setActionContext] = useState<ContextProps>(
         {} as ContextProps,
     );
 
     return (
-        <HelperContext.Provider value={actionContext}>
+        <ModalHelperContext.Provider value={actionContext}>
             {strategies.map((item) => {
                 return (
                     <Strategy
@@ -28,12 +28,12 @@ export default function HelperProvider({ children }: { children: ReactNode }) {
                 );
             })}
             {children}
-        </HelperContext.Provider>
+        </ModalHelperContext.Provider>
     );
 }
 
-export const HelperContext = createContext<ContextProps>({} as ContextProps);
+export const ModalHelperContext = createContext<ContextProps>({} as ContextProps);
 
-export function useHelper() {
-    return useContext(HelperContext);
+export function useModalHelper() {
+    return useContext(ModalHelperContext);
 }

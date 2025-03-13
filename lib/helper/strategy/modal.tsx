@@ -81,7 +81,7 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
         <div
             key={modal.id}
             className={
-                `fixed inset-0 z-999 backdrop-blur flex items-center justify-center modal-container-backdrop`
+                `fixed inset-0 z-999 backdrop-blur backdrop-opacity-25 flex items-center justify-center modal-container-backdrop`
             }
             onClick={closeModal}
         >
