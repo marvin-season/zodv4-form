@@ -24,16 +24,16 @@ const InfiniteModal = () => {
                             </span>
                         </div>
                     ),
-                    footerRender: ({ closeModal, confirmModal, loading }) => {
-                        return (
-                            <div className={"flex gap-2"}>
-                                <button onClick={closeModal}>cancel</button>
-                                <button onClick={confirmModal}>
-                                    {loading ? "loading" : "confirm"}
-                                </button>
-                            </div>
-                        );
-                    },
+                    // footerRender: ({ closeModal, confirmModal, loading }) => {
+                    //     return (
+                    //         <div className={"flex gap-2"}>
+                    //             <button onClick={closeModal}>cancel</button>
+                    //             <button onClick={confirmModal}>
+                    //                 {loading ? "loading" : "confirm"}
+                    //             </button>
+                    //         </div>
+                    //     );
+                    // },
                     onBeforeConfirm: () => {
                         console.log("onBeforeConfirm");
                         return new Promise((resolve) =>

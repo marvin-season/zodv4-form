@@ -1,5 +1,6 @@
 import { ReactNode, useRef, useState } from "react";
 import { IStrategy } from "./index";
+import { useModalHelper } from "@/helper";
 
 export type ModalHeaderRender = (actions: {
     closeModal?: () => void;
@@ -67,6 +68,7 @@ function useAction(state: StateType) {
 function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
     const [i1, i2] = transferToDirection(modal.id || 0);
     const [loading, setLoading] = useState(false);
+    const { modalCustomize } = useModalHelper();
     const closeModal = () => {
         close(modal.id!);
     };
@@ -112,30 +114,17 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
 
                 <div className={"flex-1 modal-content"}>{modal.render()}</div>
                 {/*footer*/}
-                {modal.footerRender ? (
-                    modal.footerRender({ closeModal, confirmModal, loading })
-                ) : (
-                    <div className={"flex justify-end gap-2 modal-footer"}>
-                        <button
-                            className={
-                                "cursor-pointer rounded border px-2.5 py-1.5 text-[#222] leading-4 text-sm"
-                            }
-                            onClick={() => {
-                                close(modal.id!);
-                            }}
-                        >
-                            取消
-                        </button>
-                        <button
-                            className={
-                                "cursor-pointer rounded bg-blue-500 hover:bg-blue-600 px-2.5 py-1.5 text-white leading-4 text-sm"
-                            }
-                            onClick={confirmModal}
-                        >
-                            {loading ? "loading" : "确认"}
-                        </button>
-                    </div>
-                )}
+                {modal.footerRender
+                    ? modal.footerRender({ closeModal, confirmModal, loading })
+
+                    : modalCustomize.footerRender
+
+                      ? modalCustomize.footerRender({
+                            closeModal,
+                            confirmModal,
+                            loading,
+                        })
+                      : null}
             </div>
         </div>
     );

@@ -8,14 +8,13 @@ import {
 } from "./strategy/modal";
 import { ActionType as NotificationActionType } from "./strategy/notification";
 import { ActionType as ConfirmActionType } from "./strategy/confirm";
+import { InitModalFooterRender } from "@/helper/init/modal.tsx";
 
 export interface ModalHelperConfig {}
-export interface ModalHelperCustomize {
-    modal: {
-        headerRender?: ModalHeaderRender;
-        render?: ModalContentRender;
-        footerRender?: ModalFooterRender;
-    };
+export interface ModalCustomize {
+    headerRender?: ModalHeaderRender;
+    render?: ModalContentRender;
+    footerRender?: ModalFooterRender;
 }
 
 export interface ContextProps {
@@ -23,19 +22,21 @@ export interface ContextProps {
     notification: NotificationActionType;
     confirm: ConfirmActionType;
     config?: ModalHelperConfig;
-    customize?: ModalHelperCustomize;
+    modalCustomize: ModalCustomize;
 }
 
 export default function ModalHelperProvider({
     children,
-    customize,
+    modalCustomize = {
+        footerRender: InitModalFooterRender,
+    },
 }: {
     children: ReactNode;
-    customize?: ModalHelperCustomize;
+    modalCustomize?: ModalCustomize;
 }) {
     const strategies = useStrategies();
     const [actionContext, setActionContext] = useState<ContextProps>({
-        customize,
+        modalCustomize,
     } as ContextProps);
 
     return (
