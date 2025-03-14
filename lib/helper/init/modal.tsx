@@ -67,7 +67,7 @@ export const initModalHeaderRender: ModalHeaderRender = ({
  * @param closeModal
  * @param confirmModal
  */
-export const modalCustomizeRender: ModalCustomizeRender = ({
+export const initModalCustomizeRender: ModalCustomizeRender = ({
     loading,
     modal,
     closeModal,

@@ -4,9 +4,7 @@ import { ActionType as ModalActionType } from "./strategy/modal";
 import { ActionType as NotificationActionType } from "./strategy/notification";
 import { ActionType as ConfirmActionType } from "./strategy/confirm";
 import {
-    initModalCustomize,
-    modalCustomizeRender,
-    type ModalCustomize,
+    initModalCustomizeRender,
     type ModalCustomizeRender,
 } from "@/helper/init/modal.tsx";
 
@@ -17,23 +15,19 @@ export interface ContextProps {
     notification: NotificationActionType;
     confirm: ConfirmActionType;
     config?: ModalHelperConfig;
-    modalCustomize: ModalCustomize | ModalCustomizeRender;
+    modalCustomizeRender: ModalCustomizeRender;
 }
 
 export default function ModalHelperProvider({
     children,
-    modalCustomize,
+    modalCustomizeRender,
 }: {
     children: ReactNode;
-    modalCustomize?: ModalCustomize | ModalCustomizeRender;
+    modalCustomizeRender?: ModalCustomizeRender;
 }) {
     const strategies = useStrategies();
     const [actionContext, setActionContext] = useState<ContextProps>({
-        modalCustomize: modalCustomize
-            ? typeof modalCustomize === "function"
-                ? modalCustomize
-                : Object.assign(modalCustomize, initModalCustomize)
-            : modalCustomizeRender,
+        modalCustomizeRender: modalCustomizeRender || initModalCustomizeRender,
     } as ContextProps);
 
     return (

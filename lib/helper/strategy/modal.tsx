@@ -62,7 +62,7 @@ function useAction(state: StateType) {
 }
 
 function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
-    const { modalCustomize } = useModalHelper();
+    const { modalCustomizeRender } = useModalHelper();
     const [loading, setLoading] = useState(false);
     const closeModal = () => {
         close(modal.id!);
@@ -81,7 +81,7 @@ function Modal({ modal, close }: { modal: Modal } & Pick<ActionType, "close">) {
     };
     return (
         <>
-            {(modalCustomize as ModalCustomizeRender)?.({
+            {modalCustomizeRender({
                 modal,
                 closeModal,
                 confirmModal,

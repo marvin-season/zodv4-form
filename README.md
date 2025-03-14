@@ -96,3 +96,25 @@ const openYourNotification = async () => await modalHelper.confirm.warning({
     }
 });
 ```
+
+## Customize
+
+```tsx
+ <ModalHelperProvider
+    modalCustomizeRender={({ modal, closeModal, confirmModal, loading }) => {
+        return (
+            <div>
+                {modal.headerRender?.({ closeModal, title: modal.title })}
+                {modal.render()}
+                {modal.footerRender?.({
+                    closeModal,
+                    confirmModal,
+                    loading,
+                })}
+            </div>
+        );
+    }}
+>
+    <UseCase />
+</ModalHelperProvider>,
+```
