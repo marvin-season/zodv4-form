@@ -52,7 +52,54 @@ const openYourNotification = () => modalHelper.notification.warning("网络异�
 ```tsx
 const openYourModal = async () =>  await modalHelper.modal.open({
     title: "The InfiniteModal",
-    render: InfiniteModal,
+    render: InfiniteModal
+});
+```
+
+## Confirm
+```tsx
+const openYourNotification = async () => await modalHelper.confirm.warning({
+    render: () => {
+        return <>hi</>;
+    },
+    onBeforeConfirm: () => {
+        console.log("onBeforeConfirm");
+        return new Promise((resolve) =>
+            setTimeout(resolve, 1000),
+        );
+    },
+    onConfirm() {
+        console.log("onConfirm");
+    }
+});
+```
+
+## Customize
+### Whole
+```tsx
+ <ModalHelperProvider
+    modalCustomizeRender={({ modal, closeModal, confirmModal, loading }) => {
+        return (
+            <div>
+                {modal.headerRender?.({ closeModal, title: modal.title })}
+                {modal.render()}
+                {modal.footerRender?.({
+                    closeModal,
+                    confirmModal,
+                    loading,
+                })}
+            </div>
+        );
+    }}
+>
+    <UseCase />
+</ModalHelperProvider>
+```
+### Partial
+```tsx
+const openYourModal = async () =>  await modalHelper.modal.open({
+    title: "The InfiniteModal",
+    render: () => <div></div>,
     headerRender: ({closeModal}) =>  <div className={"text-lg font-bold flex justify-between"}>
         <span>Custom Title</span>
         <span className={"cursor-pointer"} onClick={closeModal}>X</span>
@@ -77,44 +124,4 @@ const openYourModal = async () =>  await modalHelper.modal.open({
         console.log("onConfirm");
     },
 });
-```
-
-## Confirm
-```tsx
-const openYourNotification = async () => await modalHelper.confirm.warning({
-    render: () => {
-        return <>hi</>;
-    },
-    onBeforeConfirm: () => {
-        console.log("onBeforeConfirm");
-        return new Promise((resolve) =>
-            setTimeout(resolve, 1000),
-        );
-    },
-    onConfirm() {
-        console.log("onConfirm");
-    }
-});
-```
-
-## Customize
-
-```tsx
- <ModalHelperProvider
-    modalCustomizeRender={({ modal, closeModal, confirmModal, loading }) => {
-        return (
-            <div>
-                {modal.headerRender?.({ closeModal, title: modal.title })}
-                {modal.render()}
-                {modal.footerRender?.({
-                    closeModal,
-                    confirmModal,
-                    loading,
-                })}
-            </div>
-        );
-    }}
->
-    <UseCase />
-</ModalHelperProvider>,
 ```
