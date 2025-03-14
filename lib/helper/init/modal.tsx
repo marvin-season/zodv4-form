@@ -5,7 +5,6 @@ import {
     ModalHeaderRender,
 } from "@/helper/strategy/modal.tsx";
 import { ReactNode } from "react";
-import { useModalHelper } from "@/helper";
 
 export interface ModalCustomize {
     headerRender?: ModalHeaderRender;
@@ -113,4 +112,9 @@ export const modalCustomizeRender: ModalCustomizeRender = ({
             </div>
         </div>
     );
+};
+
+export const initModalCustomize: ModalCustomize = {
+    headerRender: initModalHeaderRender,
+    footerRender: initModalFooterRender,
 };

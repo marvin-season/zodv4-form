@@ -3,10 +3,11 @@ import { Strategy, useStrategies } from "./strategy";
 import { ActionType as ModalActionType } from "./strategy/modal";
 import { ActionType as NotificationActionType } from "./strategy/notification";
 import { ActionType as ConfirmActionType } from "./strategy/confirm";
-import initModalCustomize, {
-    ModalCustomize,
+import {
+    initModalCustomize,
     modalCustomizeRender,
-    ModalCustomizeRender,
+    type ModalCustomize,
+    type ModalCustomizeRender,
 } from "@/helper/init/modal.tsx";
 
 export interface ModalHelperConfig {}
@@ -28,7 +29,11 @@ export default function ModalHelperProvider({
 }) {
     const strategies = useStrategies();
     const [actionContext, setActionContext] = useState<ContextProps>({
-        modalCustomize: modalCustomize ? modalCustomize : modalCustomizeRender,
+        modalCustomize: modalCustomize
+            ? typeof modalCustomize === "function"
+                ? modalCustomize
+                : Object.assign(modalCustomize, initModalCustomize)
+            : modalCustomizeRender,
     } as ContextProps);
 
     return (
