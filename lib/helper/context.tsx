@@ -1,28 +1,22 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { Strategy, useStrategies } from "./strategy";
-import {
-    ActionType as ModalActionType,
-    ModalContentRender,
-    ModalFooterRender,
-    ModalHeaderRender,
-} from "./strategy/modal";
+import { ActionType as ModalActionType } from "./strategy/modal";
 import { ActionType as NotificationActionType } from "./strategy/notification";
 import { ActionType as ConfirmActionType } from "./strategy/confirm";
-import initModalCustomize from "@/helper/init/modal.tsx";
+import initModalCustomize, {
+    ModalCustomize,
+    modalCustomizeRender,
+    ModalCustomizeRender,
+} from "@/helper/init/modal.tsx";
 
 export interface ModalHelperConfig {}
-export interface ModalCustomize {
-    headerRender?: ModalHeaderRender;
-    render?: ModalContentRender;
-    footerRender?: ModalFooterRender;
-}
 
 export interface ContextProps {
     modal: ModalActionType;
     notification: NotificationActionType;
     confirm: ConfirmActionType;
     config?: ModalHelperConfig;
-    modalCustomize: ModalCustomize;
+    modalCustomize: ModalCustomize | ModalCustomizeRender;
 }
 
 export default function ModalHelperProvider({
@@ -30,11 +24,11 @@ export default function ModalHelperProvider({
     modalCustomize,
 }: {
     children: ReactNode;
-    modalCustomize?: ModalCustomize;
+    modalCustomize?: ModalCustomize | ModalCustomizeRender;
 }) {
     const strategies = useStrategies();
     const [actionContext, setActionContext] = useState<ContextProps>({
-        modalCustomize: { ...initModalCustomize, ...modalCustomize}
+        modalCustomize: modalCustomize ? modalCustomize : modalCustomizeRender,
     } as ContextProps);
 
     return (
