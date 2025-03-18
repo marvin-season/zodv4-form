@@ -24,7 +24,7 @@ export interface ModalCustomizeRender<T extends Modal = Modal> {
     }): ReactNode;
 }
 
-const Direction = [0, 1, -1];
+const Direction = [0, 0, 1, 0, -1];
 
 function transferToDirection(i: number) {
     const index = i % Direction.length;
