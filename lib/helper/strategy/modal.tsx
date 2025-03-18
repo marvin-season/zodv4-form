@@ -57,6 +57,7 @@ function useAction(state: StateType) {
         },
         close: (id: number) => {
             state.setModals((prev) => prev.filter((item) => item.id !== id));
+            state.idRef.current--;
         },
     };
 }
