@@ -74,9 +74,7 @@ export default function UseCase() {
                 }
                 onClick={async (e) => {
                     const result = await helper.confirm.warning({
-                        render: () => {
-                            return <>hi</>;
-                        },
+                        content: <div className={'text-sm underline text-red-500'}>Are you sure to delete?</div>,
                         onBeforeConfirm: () => {
                             console.log("onBeforeConfirm");
                             return new Promise((resolve) =>

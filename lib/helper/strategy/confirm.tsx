@@ -6,7 +6,7 @@ import "tippy.js/animations/shift-away.css"; // 过渡动画
 type Confirm = {
     id?: number;
     type?: "danger" | "warning";
-    render: () => ReactNode;
+    content?: ReactNode;
     onBeforeConfirm?: () => Promise<void> | void;
     onConfirm?: () => Promise<void> | void;
     className?: string;
@@ -55,10 +55,10 @@ function ConfirmUI({confirm, close}: StateType & ActionType) {
     return (
         <Tippy
             animation="shift-away"
-            className={`backdrop-blur backdrop-opacity-80 p-2 rounded-lg shadow text-sm w-[100px] confirm-container ${confirm.className}`}
+            className={`backdrop-blur backdrop-opacity-90 p-2 rounded-lg shadow-md text-sm confirm-container ${confirm.className}`}
             content={
                 <div className={"flex gap-2 justify-between"}>
-                    {confirm.render()}
+                    {confirm.content}
                     <button
                         onClick={async () => {
                             setLoading(true);
@@ -74,7 +74,7 @@ function ConfirmUI({confirm, close}: StateType & ActionType) {
                         }}
                         className={"text-red-400 text-sm"}
                     >
-                        {loading ? "loading" : "确认"}
+                        {loading ? "loading" : "ok"}
                     </button>
                 </div>
             }
