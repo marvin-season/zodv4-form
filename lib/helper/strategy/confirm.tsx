@@ -47,31 +47,30 @@ function useAction(state: StateType) {
     };
 }
 
-function ConfirmUI(props: StateType & ActionType) {
-    // only one
+function ConfirmUI({confirm, close}: StateType & ActionType) {
     const [loading, setLoading] = useState(false);
-    if (!props.confirm) {
+    if (!confirm) {
         return null;
     }
     return (
         <Tippy
             animation="shift-away"
-            className="backdrop-blur backdrop-opacity-80 p-2 rounded-lg shadow text-sm w-[100px]"
+            className={`backdrop-blur backdrop-opacity-80 p-2 rounded-lg shadow text-sm w-[100px] confirm-container ${confirm.className}`}
             content={
                 <div className={"flex gap-2 justify-between"}>
-                    {props.confirm.render()}
+                    {confirm.render()}
                     <button
                         onClick={async () => {
                             setLoading(true);
                             try {
-                                await props.confirm!.onBeforeConfirm?.();
-                                props.close();
-                                props.confirm!.onConfirm?.();
+                                await confirm!.onBeforeConfirm?.();
+                                close();
+                                confirm!.onConfirm?.();
                             } catch (e) {
                             } finally {
                                 setLoading(false);
                             }
-                            props.close();
+                            close();
                         }}
                         className={"text-red-400 text-sm"}
                     >
@@ -80,11 +79,11 @@ function ConfirmUI(props: StateType & ActionType) {
                 </div>
             }
             interactive
-            reference={props.confirm.target}
+            reference={confirm.target}
             placement={"top-start"} // 将弹窗位置设置为底部
-            visible={!!props.confirm}
+            visible={!!confirm}
             onClickOutside={() => {
-                props.close();
+                close();
             }} // 点击外部关闭弹窗
         />
     );

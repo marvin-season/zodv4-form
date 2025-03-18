@@ -1,7 +1,6 @@
 import { ReactNode, useRef, useState } from "react";
 import { IStrategy } from "./index";
 import { useModalHelper } from "@/helper";
-import { ModalCustomizeRender } from "@/helper/init/modal.tsx";
 
 export type ModalHeaderRender = (actions: {
     closeModal?: () => void;
