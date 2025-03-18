@@ -12,8 +12,8 @@ pnpm add aio-modal
 ```
 
 ## config
-**`node_modules/aio-modal/**/*`** in your tailwind config
-
+Adding **`node_modules/aio-modal/**/*`** to your Tailwind config.
+Note: **`node_modules/aio-modal/**/*`** is the path where aio-modal is installed
 ```shell
 export default {
   content: ['node_modules/aio-modal/**/*'],
