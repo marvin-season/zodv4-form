@@ -1,4 +1,10 @@
-# ZodV4Form 组件使用说明书
+# ZodV4Form
+
+使用npm安装时需要设置源
+
+```bash
+npm config set registry https://registry.npmjs.org
+```
 
 <p align="center">
   <strong>基于 Zod v4 的 React 表单组件库</strong>
