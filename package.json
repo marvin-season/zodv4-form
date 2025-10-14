@@ -1,7 +1,7 @@
 {
   "name": "zodv4-form",
   "private": false,
-  "version": "0.0.5",
+  "version": "1.0.0",
   "type": "module",
   "types": "./dist/main.d.ts",
   "module": "./dist/main.js",
