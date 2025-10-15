@@ -38,7 +38,7 @@ export default defineConfig({
       external: (id) => !id.startsWith(".") && !id.startsWith("/") && !id.startsWith("@/"),
       output: {
         preserveModules: true,
-        preserveModulesRoot: "src",
+        preserveModulesRoot: "lib",
         assetFileNames: "assets/[name][extname]",
         entryFileNames: (chunkInfo) => `${chunkInfo.name}.js`,
       },
