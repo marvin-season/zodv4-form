@@ -1,47 +1,46 @@
-import { defineConfig } from "vite";
-import dts from "vite-plugin-dts";
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
 import { analyzer } from 'vite-bundle-analyzer'
-import { resolve } from "path";
+import { resolve } from 'path'
 // import react from "@vitejs/plugin-react";
 
-console.log("🚀  ", resolve(__dirname, "lib"));
+console.log('🚀  ', resolve(__dirname, 'lib'))
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     // react(), default is plugin in development
-    dts({ include: ["lib"], exclude: ["src"] }) as any,
+    dts({ include: ['lib'], exclude: ['src'] }) as any,
     analyzer({
       openAnalyzer: false,
       enabled: false,
-      fileName: "bundle-analyzer.html"
+      fileName: 'bundle-analyzer.html',
     }),
   ],
-  css: {
-    postcss: './postcss.config.js',
-  },
+
   server: {
     port: 10006,
     host: true,
   },
   resolve: {
     alias: {
-      "@": resolve(__dirname, "lib"),
+      '@': resolve(__dirname, 'lib'),
     },
   },
   build: {
     lib: {
-      entry: resolve(__dirname, "lib/main.ts"),
-      formats: ["es"],
+      entry: resolve(__dirname, 'lib/main.ts'),
+      formats: ['es'],
     },
     copyPublicDir: false,
     rollupOptions: {
-      external: (id) => !id.startsWith(".") && !id.startsWith("/") && !id.startsWith("@/"),
+      external: (id) =>
+        !id.startsWith('.') && !id.startsWith('/') && !id.startsWith('@/'),
       output: {
         preserveModules: true,
-        preserveModulesRoot: "lib",
-        assetFileNames: "assets/[name][extname]",
+        preserveModulesRoot: 'lib',
+        assetFileNames: 'assets/[name][extname]',
         entryFileNames: (chunkInfo) => `${chunkInfo.name}.js`,
       },
     },
   },
-});
+})
