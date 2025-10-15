@@ -1,16 +1,13 @@
 {
   "name": "zodv4-form",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "types": "./dist/main.d.ts",
   "module": "./dist/main.js",
   "exports": {
     ".": {
       "import": "./dist/main.js"
-    },
-    "./styles": {
-      "import": "./dist/assets/style.css"
     }
   },
   "files": [
