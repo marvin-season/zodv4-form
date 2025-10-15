@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
-
+import { analyzer } from 'vite-bundle-analyzer'
 import { resolve } from "path";
 
 console.log("🚀  ", resolve(__dirname, "lib"));
@@ -10,6 +10,11 @@ export default defineConfig({
   plugins: [
     react(),
     dts({ include: ["lib"], exclude: ["src"] }) as any,
+    analyzer({
+      openAnalyzer: false,
+      enabled: false,
+      fileName: "bundle-analyzer.html"
+    }),
   ],
   css: {
     postcss: './postcss.config.js',
