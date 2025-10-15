@@ -88,3 +88,4 @@ function App() {
 | `className`      | `string`               | ❌   | `''`     | 表单容器的 CSS 类名                     |
 | `fieldClassName` | `string`               | ❌   | `''`     | 表单字段容器的 CSS 类名                 |
 | `renderFooter`   | `(props) => ReactNode` | ❌   | 默认按钮 | 自定义底部操作区域                      |
+| `renderFields`   | `(props) => ReactNode` | ❌   | -        | 自定义字段渲染                          |

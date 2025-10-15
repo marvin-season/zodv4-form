@@ -2,7 +2,7 @@ import { extractComponent } from "./extract-component";
 import { type TComponentMap } from "./builtin-components";
 import type { INativeInputProps } from "./native";
 
-type ZodV4FieldProps<T = string> = INativeInputProps<T> & {
+export type ZodV4FieldProps<T = string> = INativeInputProps<T> & {
     components: TComponentMap;
     isRequired?: boolean;
     name: string;
