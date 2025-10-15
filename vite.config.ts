@@ -1,14 +1,14 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 import { analyzer } from 'vite-bundle-analyzer'
 import { resolve } from "path";
+// import react from "@vitejs/plugin-react";
 
 console.log("🚀  ", resolve(__dirname, "lib"));
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
+    // react(), default is plugin in development
     dts({ include: ["lib"], exclude: ["src"] }) as any,
     analyzer({
       openAnalyzer: false,

@@ -9,5 +9,7 @@ const schema = z.object({
 });
 
 createRoot(document.getElementById("root") as HTMLElement).render(
-    <ZodV4Form schema={schema} onSubmit={console.log} />,
+    <>
+        <ZodV4Form schema={schema} onSubmit={console.log} />
+    </>,
 );
