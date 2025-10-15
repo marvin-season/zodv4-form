@@ -51,10 +51,16 @@ const schema = z.object({
 
 function App() {
     const handleSubmit = (data) => {
-        console.log("表单数据:", data);
+        console.log("form data:", data);
     };
 
-    return <ZodV4Form schema={schema} onSubmit={handleSubmit} />;
+    return (
+        <ZodV4Form
+            schema={schema}
+            onSubmit={handleSubmit}
+            components={customComponents}
+        />
+    );
 }
 ```
 
@@ -70,7 +76,3 @@ function App() {
 | `fieldClassName` | `string`               | `''`                | CSS class name for the form field container                         |
 | `renderFooter`   | `(props) => ReactNode` | Default buttons     | Custom footer area                                                  |
 | `renderFields`   | `(props) => ReactNode` | -                   | Custom field rendering                                              |
-
-## License
-
-MIT
