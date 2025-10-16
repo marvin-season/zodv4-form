@@ -16,7 +16,7 @@ Focused on headless form validation and UI.
 
 ## Basic Example
 
-[Playground](./lib/playground.tsx)
+[Playground](https://github.com/marvin-season/zodv4-form/tree/main/lib/playground.tsx)
 
 ## API Reference
 

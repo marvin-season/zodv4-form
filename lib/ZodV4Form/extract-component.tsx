@@ -14,23 +14,20 @@ export const extractComponent: ExtractComponentParams<TComponentMap> = (
 
   const components = Object.assign(defaultComponents, params.components)
 
-  if (fieldJsonSchema.type && !components[fieldJsonSchema.type]) {
-    return {
-      component: () => (
-        <div>
-          <mark>
-            Unsupported type: <strong>{fieldJsonSchema.type}</strong>, Please
-            use
-            <strong> defineComponents</strong> to define a custom component.
-          </mark>
-        </div>
-      ),
-    }
-  }
-  const { component = 'string' } = fieldJsonSchema
+  const component = fieldJsonSchema.component || fieldJsonSchema.type
 
-  const CustomComponent = components[component]
+  if (component && components[component]) {
+    return { component: components[component] }
+  }
+
   return {
-    component: CustomComponent,
+    component: () => (
+      <div>
+        <mark>
+          Unsupported type: <strong>{component}</strong>, Please use
+          <strong> defineComponents</strong> to define a custom component.
+        </mark>
+      </div>
+    ),
   }
 }
