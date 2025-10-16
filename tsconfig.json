@@ -24,6 +24,6 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": false
   },
-  "include": ["src", "lib"],
+  "include": ["src", "lib", "playground"],
   "references": []
 }

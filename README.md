@@ -1,5 +1,7 @@
 # ZodV4Form
 
+[Github](https://github.com/marvin-season/zodv4-form)
+
 ```bash
 npm config set registry https://registry.npmjs.org
 ```
@@ -16,7 +18,22 @@ Focused on headless form validation and UI.
 
 ## Basic Example
 
-[Playground](https://github.com/marvin-season/zodv4-form/tree/main/lib/playground.tsx)
+[Playground](https://github.com/marvin-season/zodv4-form/tree/main/playground/index.tsx)
+
+```tsx
+import { ZodV4Form } from 'zodv4-form'
+import { z } from 'zod'
+
+const App = () => (
+  <ZodV4Form
+    schema={z.object({
+      email: z.email(),
+    })}
+    onSubmit={console.log}
+    components={{}}
+  />
+)
+```
 
 ## API Reference
 
