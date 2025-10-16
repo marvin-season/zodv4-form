@@ -1,0 +1,318 @@
+/* 表单容器 */
+.formContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+}
+
+.formTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.formDescription {
+  font-size: 16px;
+  color: #718096;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* 表单字段容器 */
+.fieldGroup {
+  margin-bottom: 24px;
+}
+
+/* 标签样式 */
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 8px;
+}
+
+.required {
+  color: #e53e3e;
+  margin-left: 4px;
+}
+
+/* 输入框通用样式 */
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #2d3748;
+  background-color: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  transition: all 0.2s;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.input:hover,
+.textarea:hover,
+.select:hover {
+  border-color: #cbd5e0;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* 错误状态 */
+.inputError,
+.textareaError,
+.selectError {
+  border-color: #e53e3e;
+}
+
+.inputError:focus,
+.textareaError:focus,
+.selectError:focus {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+.errorMessage {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #e53e3e;
+  font-weight: 500;
+}
+
+/* 复选框样式 */
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+  accent-color: #3b82f6;
+}
+
+.checkboxLabel {
+  font-size: 14px;
+  color: #2d3748;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 单选框样式 */
+.radioGroup {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.radioWrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.radio {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+  accent-color: #3b82f6;
+}
+
+.radioLabel {
+  font-size: 14px;
+  color: #2d3748;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 多选框样式 */
+.multiSelectGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  background-color: #f7fafc;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+}
+
+/* 范围滑块样式 */
+.rangeWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.rangeValue {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3b82f6;
+  margin-left: 8px;
+}
+
+.range {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(
+    to right,
+    #3b82f6 0%,
+    #3b82f6 50%,
+    #e2e8f0 50%,
+    #e2e8f0 100%
+  );
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  margin-top: 8px;
+}
+
+.range::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.range::-webkit-slider-thumb:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+}
+
+.range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+}
+
+.range::-moz-range-thumb:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+}
+
+/* 颜色选择器 */
+.colorInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.colorInput {
+  width: 60px;
+  height: 40px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.colorValue {
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+/* 文件上传 */
+.fileInput {
+  padding: 8px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.fileInput::file-selector-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 12px;
+  transition: background-color 0.2s;
+}
+
+.fileInput::file-selector-button:hover {
+  background-color: #2563eb;
+}
+
+/* 提交按钮 */
+.submitButton {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 32px;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+/* 分隔线 */
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+  margin: 32px 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 640px) {
+  .formContainer {
+    padding: 20px 16px;
+  }
+
+  .formTitle {
+    font-size: 24px;
+  }
+
+  .radioGroup {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
