@@ -1,6 +1,4 @@
-# Playground
-
-<image src="./index.png" alt="index" />
+<image src="./index.png" width="80%" alt="index" />
 
 ## Basic Example
 
