@@ -18,7 +18,6 @@ export function ZodV4Field({
   isRequired,
   value,
   error,
-  className,
   updateField,
   onValidate,
 }: ZodV4FieldProps) {

@@ -63,33 +63,33 @@ export default function ZodV4Form<T extends ZodSchema>(
     }
   }
 
-  const handleValidate = useCallback(
+  const errorHandler = useCallback(
     (args: {
-      result: z.ZodSafeParseResult<unknown>
+      error: NonNullable<z.ZodSafeParseResult<unknown>['error']>
       name?: string
       bypassCallback?: (data: any) => void
     }) => {
-      const { name, result, bypassCallback } = args
-      if (result.success) {
-        setErrors({})
-        bypassCallback?.(result.data)
-      } else {
-        const newErrors: Record<string, string> = {}
-        result.error.issues.forEach((issue) => {
-          const path = name || issue.path.join('.')
-          newErrors[path] = issue.message
-        })
-        setErrors(newErrors)
-      }
+      const { name, error } = args
+      const newErrors: Record<string, string> = {}
+      error.issues.forEach((issue) => {
+        const path = name || issue.path.join('.')
+        newErrors[path] = issue.message
+      })
+      setErrors(newErrors)
     },
     [setErrors],
   )
 
-  const onValidate = (name: string, value: any) => {
+  const onValidate = async (name: string, value: any) => {
     const fieldSchema = schema.shape[name]!
 
     const result = fieldSchema?.safeParse(value)
-    handleValidate({ result, name })
+    if (result.success) {
+      setErrors({})
+    } else {
+      errorHandler({ error: result.error, name })
+    }
+    return result.success
   }
 
   // 表单提交
@@ -97,12 +97,14 @@ export default function ZodV4Form<T extends ZodSchema>(
     e.preventDefault()
 
     const result = schema.safeParse(formData)
-    handleValidate({
-      result,
-      bypassCallback: (data) => {
-        onSubmit(data)
-      },
-    })
+    if (result.success) {
+      setErrors({})
+      onSubmit(result.data)
+    } else {
+      errorHandler({
+        error: result.error,
+      })
+    }
   }
 
   const handleReset = () => {

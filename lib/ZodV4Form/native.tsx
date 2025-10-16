@@ -14,7 +14,7 @@ export type INativeInputProps<T> = Pick<
   'placeholder' | 'disabled' | 'required' | 'className'
 > & {
   onChange?: (value: T) => void
-  onValidate?: (name: string, value: T) => void
+  onValidate?: (name: string, value: T) => Promise<boolean>
   readonly value?: T
   error?: string
   label?: string
