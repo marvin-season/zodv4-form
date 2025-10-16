@@ -18,50 +18,21 @@ Focused on headless form validation and UI.
 
 ```tsx
 import { ZodV4Form, defineComponents } from 'zodv4-form'
-import { z } from 'zod/v4'
+import { z } from 'zod'
 
-const customComponents = defineComponents({
-  slider: (props) => {
-    const { fieldJsonSchema, onChange, value } = props
-    const enumValues = fieldJsonSchema.enum as string[]
-    const marks = Object.fromEntries(
-      enumValues?.map((item, index) => [index, item]) ?? [],
-    )
-
-    return (
-      <Slider
-        value={enumValues.indexOf(value)}
-        min={0}
-        max={enumValues.length - 1}
-        step={1}
-        marks={marks}
-        onChange={(value) => onChange?.(enumValues[value])}
-      />
-    )
-  },
-})
 const schema = z.object({
-  framework: z.enum(['react', 'vue', 'angular']).default('react').meta({
-    component: 'slider',
-  }),
-
-  // Email
-  email: z.email().default('test@gmail.com'),
+  name: z.string().min(1),
+  email: z.email(),
+  age: z.number().min(18),
 })
-
-function App() {
-  const handleSubmit = (data) => {
-    console.log('form data:', data)
-  }
-
-  return (
-    <ZodV4Form
-      schema={schema}
-      onSubmit={handleSubmit}
-      components={customComponents}
-    />
-  )
-}
+const components = defineComponents({
+  number: (props) => <input type='number' {...props} />,
+})
+createRoot(document.getElementById('root') as HTMLElement).render(
+  <>
+    <ZodV4Form schema={schema} onSubmit={console.log} components={components} />
+  </>,
+)
 ```
 
 ## API Reference

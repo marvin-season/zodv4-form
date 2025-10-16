@@ -1,5 +1,5 @@
 import { extractComponent } from './extract-component'
-import { type TComponentMap } from './builtin-components'
+import { type TComponentMap } from './default-components'
 import type { INativeInputProps } from './native'
 
 export type ZodV4FieldProps<T = string> = INativeInputProps<T> & {
@@ -23,7 +23,7 @@ export function ZodV4Field({
   onValidate,
 }: ZodV4FieldProps) {
   // 根据类型渲染对应的组件
-  const { component: FieldComponent, isCustom } = extractComponent({
+  const { component: FieldComponent } = extractComponent({
     fieldJsonSchema,
     components,
   })
@@ -32,45 +32,19 @@ export function ZodV4Field({
 
   const { label, description } = fieldJsonSchema
 
-  if (isCustom) {
-    return (
-      <FieldComponent
-        name={name}
-        label={label || name}
-        description={description}
-        value={value}
-        error={error}
-        isRequired={isRequired}
-        onValidate={onValidate}
-        onChange={(newValue) => {
-          updateField(name, newValue)
-        }}
-        fieldJsonSchema={fieldJsonSchema}
-      />
-    )
-  }
-
   return (
-    <div key={name} className={`${className}`}>
-      <label>
-        {label || name}
-        {isRequired && <span>*</span>}
-      </label>
-
-      {description && <p>{description}</p>}
-
-      <FieldComponent
-        name={name}
-        value={value}
-        error={error}
-        onValidate={onValidate}
-        onChange={(newValue) => {
-          updateField(name, newValue)
-        }}
-        fieldJsonSchema={fieldJsonSchema}
-      />
-
-      {error && <p>{error}</p>}
-    </div>
+    <FieldComponent
+      name={name}
+      label={label || name}
+      description={description}
+      value={value}
+      error={error}
+      isRequired={isRequired}
+      onValidate={onValidate}
+      onChange={(newValue) => {
+        updateField(name, newValue)
+      }}
+      fieldJsonSchema={fieldJsonSchema}
+    />
   )
 }
