@@ -11,12 +11,12 @@ const schema = z.object({
     .meta({
       component: 'file',
     }),
-  name: z.string().min(1),
-  email: z.email(),
+  name: z.string().min(1).default('John Doe'),
+  email: z.email().default('john.doe@example.com'),
 })
 const components = defineComponents({
   file: (props) => {
-    const { name, value, error, onValidate } = props
+    const { name, value, error, onValidate, onChange } = props
     return (
       <>
         <input
@@ -24,10 +24,13 @@ const components = defineComponents({
           name={name}
           onChange={async (e) => {
             const file = e.target.files?.[0]
+            if (!file) return
             const isValid = await onValidate?.(name, file)
             console.log(isValid)
             if (!isValid) {
               e.target.value = ''
+            } else {
+              onChange?.(file)
             }
           }}
         />
