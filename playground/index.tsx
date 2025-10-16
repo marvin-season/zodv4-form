@@ -3,6 +3,18 @@ import { defineComponents, ZodV4Form } from '../lib/ZodV4Form'
 import { z } from 'zod'
 import { FileInput, RadioInput, Select } from './components'
 
+const components = defineComponents({
+  file: FileInput,
+  radio: RadioInput,
+  select: Select,
+})
+
+declare module 'zod' {
+  interface GlobalMeta {
+    component?: keyof typeof components
+  }
+}
+
 const schema = z.object({
   avatar: z
     .file()
@@ -27,11 +39,7 @@ const schema = z.object({
     })
     .default('Beijing'),
 })
-const components = defineComponents({
-  file: FileInput,
-  radio: RadioInput,
-  select: Select,
-})
+
 createRoot(document.getElementById('root') as HTMLElement).render(
   <>
     <ZodV4Form schema={schema} onSubmit={console.log} components={components} />
